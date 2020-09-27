@@ -1,11 +1,21 @@
-{% if page_obj.paginator.has_other_pages %}
-<div class="pegination">
+{% if page_obj.has_other_pages %}
+    <div class="pegination">
+        <div class="nav-links">
+            {% if page_obj.has_previous %}
+                <a class="page-numbers" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+            {% endif %}
 
-    <div class="nav-links">
-        <span class="page-numbers current">1</span>
-        <a class="page-numbers" href="#">2</a>
+            {% for p in page_obj.paginator.page_range %}
+                {% if p == page_obj.number %}
+                    <span class="page-numbers current">{{ p }}</span>
+                {% elif page_obj.number|add:"3" > p and page_obj.number|add:"-3" < p %}
+                    <a class="page-numbers" href="?page={{ p }}">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
 
-        <a class="page-numbers" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            {% if page_obj.has_next %}
+                <a class="page-numbers" href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endif %}
