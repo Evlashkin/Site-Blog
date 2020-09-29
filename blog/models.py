@@ -51,4 +51,4 @@ class Posts(models.Model):
         verbose_name_plural = 'Публикации'
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={"slug": self.slug})
+        return reverse('single', kwargs={"slug": self.slug})
