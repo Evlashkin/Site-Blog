@@ -16,6 +16,10 @@
                                 <div class="blog-area-part">
                                     <h2>{{ single.title }}</h2>
                                     <div class="for-style">
+                                        <span>Category: {{ single.category }} </span>
+                                        <br/>
+                                        <span>Tags: {{ tags|join:", " }} </span>
+                                        <br/>
                                         <span>Views: {{ single.views }}
                                         <p><span class="drop_caps">{{ single.content|slice:"3:4" }}</span>{{ single.content|slice:"4:"|safe }} </p>
                                     </div>
