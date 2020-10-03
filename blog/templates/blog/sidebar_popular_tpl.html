@@ -1,0 +1,19 @@
+<div class="newsletter" name="popular">
+    <h2 class="sidebar-title">Popular posts</h2>
+    {% for item in popular %}
+        <div class="grid" style="position: relative; height: 80px;">
+            <div class="portfolio-item popular"
+                 style="position: absolute; left: 0px; top: 0px;">
+                {% if item.photo %}
+                    <img src="{{ item.photo.url }}" alt="{{ item.title }}">
+                {% else %}
+                    <img src="https://picsum.photos/id/1011/300/201" alt="photo is not found">
+                {% endif %}
+                <div class="portfolio-text">
+                    <h5><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h5>
+                    <p>{{ item.author }} <br/> {{ item.created_at }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

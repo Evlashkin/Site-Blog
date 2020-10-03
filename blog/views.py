@@ -40,16 +40,15 @@ class SinglePost(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(SinglePost, self).get_context_data(**kwargs)
-        tagdict = Posts.objects.get(slug=self.kwargs['slug']).tags.all()
         self.object.views = F('views') + 1
         self.object.save()
         self.object.refresh_from_db()
-        query_set_tags = Posts.objects.get(slug=self.kwargs['slug']).tags.all()
-        listtags = []
-        for item in query_set_tags:
-            tag = item.title
-            listtags.append(tag)
-        context['post_tags'] = listtags
+        # query_set_tags = Posts.objects.get(slug=self.kwargs['slug']).tags.all()
+        # listtags = []
+        # for item in query_set_tags:
+        #     tag = item.title
+        #     listtags.append(tag)
+        # context['post_tags'] = listtags
         return context
 
 
@@ -62,4 +61,9 @@ class PostByTags(ListView):
     def get_queryset(self):
         tags = Tags.objects.get(slug=self.kwargs['slug'])
         return Posts.objects.filter(tags=tags)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(PostByTags, self).get_context_data(**kwargs)
+        context['title'] = 'Публикации по тегу: ' + Tags.objects.get(slug=self.kwargs['slug']).title
+        return context
 

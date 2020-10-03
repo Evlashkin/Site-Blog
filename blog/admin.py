@@ -19,9 +19,9 @@ class PostsAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ('title', 'created_at', 'author', 'get_photo', 'category')
+    list_display = ('title', 'created_at', 'author', 'get_photo', 'category', 'views')
     list_display_links = ('title', 'created_at', 'author', 'category')
-    list_filter = ['created_at', 'category']
+    list_filter = ['created_at', 'category', 'tags']
     search_fields = ('title', 'content')
     readonly_fields = ['views', 'created_at', 'get_photo']
     fields = ['title', 'slug', 'content', 'author', 'photo', 'get_photo', 'views', 'category', 'tags', 'created_at']

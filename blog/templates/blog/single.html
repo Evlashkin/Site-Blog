@@ -17,12 +17,22 @@
                                 <div class="blog-area-part">
                                     <h2>{{ single.title }}</h2>
                                     <div class="for-style">
-                                        <span>Category: {{ single.category }} </span>
+                                        Category: <a
+                                            href="{{ single.category.get_absolute_url }}">{{ single.category }} </a></span>
                                         <br/>
-                                        <span>Tags: {{ post_tags|join:", " }} </span>
+
+                                        <span>Tags:
+                                            {% for tag in  single.tags.all %}
+                                                <a href="{{ tag.get_absolute_url }}">{{ tag }}; </a></span>
+                                            {% endfor %}
                                         <br/>
                                         <span>Views: {{ single.views }}</span>
-                                        <img src="{{ single.photo.url }}" alt="{{ single.title }}" height="400">
+                                        {% if single.photo %}
+                                            <img src="{{ single.photo.url }}" alt="{{ single.title }}" height="400">
+                                        {% else %}
+                                            <img src="https://picsum.photos/id/1011/630/400" alt="{{ single.title }}" height="400">
+                                        {% endif %}
+
                                         <p>
                                             <span class="drop_caps">{{ single.content|slice:"3:4" }}</span>
                                             {{ single.content|slice:"4:"|safe }}
@@ -134,25 +144,15 @@
                         </div>
                         <div class="col-md-4">
                             <div class="button-group filters-button-group">
-                                <button data-filter=".recent" class="button">Recent</button>
-                                <button data-filter=".popular" class="button">popular</button>
-                                <button data-filter=".users" class="button">Users</button>
+                                <a href="#recent"><button data-filter=".recent" class="button">Recent</button></a>
+                                <a href="#popular"><button data-filter=".popular" class="button">Popular</button></a>
+                                <a href="#tags"><button data-filter=".tags" class="button">Tags</button></a>
                             </div>
 
-                            <div class="grid" style="position: relative; height: 221.93px;">
-                                <div class="portfolio-item recent"
-                                     style="position: absolute; left: 0px; top: 0px;">
-                                    <img src="{% static 'img/portfolio1.jpg' %}" alt="">
-                                    <div class="portfolio-text">
-                                        <h5><a href="#">Pay Close Attention To People Who Don’t Clap When You Win
-                                            recent1.</a></h5>
-                                        <p>By Kabbo Liate <span>|</span>25 February 2017</p>
-                                    </div>
-                                </div>
-                                <br/>
-                                <br/>
-                            </div>
-                            {% show_tags %}
+                            <a name="recent"> {% show_recent %} </a>
+                            <a name="popular">{% show_popular %} </a>
+                            <a name="tags"> {% show_tags %} </a>
+
                             <div class="sidebar-ads">
                                 <img src="{% static 'img/sidebar-ads.jpg' %}" alt="">
                                 <p>Place For Your <br> Ad Banner</p>
