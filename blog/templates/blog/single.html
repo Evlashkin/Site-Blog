@@ -16,7 +16,14 @@
                                 <div class="blog-area-part">
                                     <h2>{{ single.title }}</h2>
                                     <div class="for-style">
-                                        <span>Views: {{ single.views }}
+                                        <span>Category: {{ single.category }} </span>
+                                        <br/>
+                                        Tags:
+{#                                        {% for tag in single.tags.all %}#}
+                                        <span>{{ taglist }} </span>
+{#                                        {% endfor %}#}
+                                        <br/>
+                                        <span>Views: {{ single.views }} </span>
                                         <p><span class="drop_caps">{{ single.content|slice:"3:4" }}</span>{{ single.content|slice:"4:"|safe }} </p>
                                     </div>
                                     <img src="{{ single.photo.url }}" alt="">

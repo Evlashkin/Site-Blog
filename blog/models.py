@@ -30,6 +30,9 @@ class Tags(models.Model):
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
 
+    def get_absolute_url(self):
+        return reverse('tags', kwargs={"slug": self.slug})
+
 
 class Posts(models.Model):
     title = models.CharField(max_length=200, verbose_name='Наименование публикации')
@@ -39,8 +42,8 @@ class Posts(models.Model):
     photo = models.ImageField(upload_to='photo/%Y/%m/%d', blank=True, verbose_name='Фото')
     created_at = models.DateField(auto_now_add=True)
     views = models.IntegerField(default=0)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
-    tags = models.ManyToManyField(Tags, blank=True, related_name='posts')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    tags = models.ManyToManyField(Tags, blank=True)
 
     def __str__(self):
         return self.title
