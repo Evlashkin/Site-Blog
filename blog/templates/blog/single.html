@@ -18,18 +18,9 @@
                                     <div class="for-style">
                                         <span>Category: {{ single.category }} </span>
                                         <br/>
-<<<<<<< HEAD
-                                        Tags:
-{#                                        {% for tag in single.tags.all %}#}
-                                        <span>{{ taglist }} </span>
-{#                                        {% endfor %}#}
-                                        <br/>
-                                        <span>Views: {{ single.views }} </span>
-=======
                                         <span>Tags: {{ tags|join:", " }} </span>
                                         <br/>
                                         <span>Views: {{ single.views }}
->>>>>>> 63d1befb39c72dacc1c91598ca2b1e5038f5b049
                                         <p><span class="drop_caps">{{ single.content|slice:"3:4" }}</span>{{ single.content|slice:"4:"|safe }} </p>
                                     </div>
                                     <img src="{{ single.photo.url }}" alt="">
