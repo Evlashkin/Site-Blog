@@ -49,16 +49,17 @@ class SinglePost(DetailView):
         for item in query_set_tags:
             tag = item.title
             listtags.append(tag)
-        context['tags'] = listtags
+        context['post_tags'] = listtags
         return context
 
 
 class PostByTags(ListView):
     model = Posts
-    template_name = 'blog/single.html'
-    context_object_name = 'tags'
+    template_name = 'blog/index.html'
+    context_object_name = 'posts'
     allow_empty = False
 
     def get_queryset(self):
-        return Posts.objects.get(slug=self.kwargs['slug']).tags.all()
+        tags = Tags.objects.get(slug=self.kwargs['slug'])
+        return Posts.objects.filter(tags=tags)
 
