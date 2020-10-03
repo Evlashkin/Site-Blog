@@ -40,6 +40,7 @@ class SinglePost(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(SinglePost, self).get_context_data(**kwargs)
+<<<<<<< HEAD
         tagdict = Posts.objects.get(slug=self.kwargs['slug']).tags.all()
         taglist = []
         for tag in tagdict:
@@ -61,3 +62,16 @@ class PostByTags(ListView):
     def get_queryset(self):
         return Posts.objects.get(slug=self.kwargs['slug']).tags.all()
 
+=======
+        self.object.views = F('views') + 1
+        self.object.save()
+        self.object.refresh_from_db()
+        query_set_tags = Posts.objects.get(slug=self.kwargs['slug']).tags.all()
+        listtags = []
+        for item in query_set_tags:
+            tag = item.title
+            listtags.append(tag)
+        context['tags'] = listtags
+        return context
+
+>>>>>>> 63d1befb39c72dacc1c91598ca2b1e5038f5b049
