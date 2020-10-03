@@ -27,3 +27,8 @@ def show_popular(cnt=3):
 def show_tags():
     tags = Tags.objects.all()
     return {'tags': tags}
+
+
+@register.inclusion_tag('blog/serch_tags_tpl.html')
+def show_search():
+    return None
