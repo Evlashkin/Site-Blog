@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'commentaries.apps.CommentariesConfig',
     'ckeditor',
     'ckeditor_uploader',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -192,11 +193,12 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-INTERNAL_IPS = ['127.0.0.1',]
+INTERNAL_IPS = ['127.0.0.1', ]
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': BASE_DIR/'django-cache',
+        'LOCATION': BASE_DIR / 'django-cache',
     }
 }
+MPTT_ADMIN_LEVEL_INDENT = 20

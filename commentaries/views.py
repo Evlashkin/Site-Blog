@@ -1,6 +1,17 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect
+
+from .forms import *
+from .models import CommentModel
 
 
-class Commentaries(ListView):
-    template_name = 'commentaries/commentaries.html'
+def add_comment(request):
+    qs = CommentModel.objects.all()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_comment')
+    else:
+        form = CommentForm()
+    return render(request, 'commentaries/comment_form.html', {'forms': form, 'commentaries': qs})
+

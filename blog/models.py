@@ -20,7 +20,7 @@ class Category(models.Model):
 
 class Tags(models.Model):
     title = models.CharField(max_length=50, verbose_name='Наименование тега')
-    slug = models.SlugField(max_length=500)
+    slug = models.SlugField(max_length=50)
 
     def __str__(self):
         return self.title
